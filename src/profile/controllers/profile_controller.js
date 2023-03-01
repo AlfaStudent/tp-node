@@ -9,7 +9,6 @@ const { removeFields } = require("../../../utils/remover");
 const createProfile = async (req, res) => {
     const { kind, ...body } = req.body;
     let profile;
-
     try {
         switch (kind) {
             case "person":

@@ -41,7 +41,7 @@ const patch = async (req, res) => {
             res.status(404).json({ error: "Profile not found" });
         } else {
             profile.firstName = firstName ?? profile.firstName;
-            profile.save((err, profile) => {
+            await profile.save((err, profile) => {
                 if (err) {
                     res.status(500).json({ error: err.message });
                 } else {
@@ -57,7 +57,7 @@ const patch = async (req, res) => {
 const getAccountById = async (req, res) => {
     try {
         const { id } = req.params;
-        const profile = Profile.findById({id: id});
+        const profile = await Profile.findById({id: id});
             if (err) {
                 res.status(500).json({ error: err.message });
             }
@@ -74,14 +74,14 @@ const getAccountById = async (req, res) => {
 const getPosts = async (req, res) => {
     try {
         const { id } = req.params;
-        const profile = Profile.findById({id: id});
+        const profile = await Profile.findById({id: id});
             if (err) {
                 res.status(500).json({ error: err.message });
             }
             if (!profile) {
                 res.status(404).json({ error: "profile not found" });
             }
-            Post.findById(id, (err, post) => {
+            await Post.findById(id, (err, post) => {
                 if (err) {
                     res.status(500).json({ error: err.message });
                 }

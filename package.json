@@ -1,0 +1,30 @@
+{
+    "author": "Grégoire MINSÉ <contact@gregoireminse.dev>",
+    "description": "mon api",
+    "license": "ISC",
+    "main": "server.js",
+    "name": "exoblog",
+    "version": "1.0.0",
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "cookie-session": "^2.0.0",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.9.1",
+        "passport": "^0.5.3",
+        "passport-google-oauth2": "^0.2.0",
+        "uuid": "^9.0.0"
+    },
+    "scripts": {
+        "format": "prettier --write .",
+        "watch": "nodemon server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "jest": "^29.4.1",
+        "nodemon": "^2.0.20",
+        "prettier": "^2.8.4",
+        "supertest": "^6.3.3"
+    }
+}

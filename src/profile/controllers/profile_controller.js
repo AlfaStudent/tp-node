@@ -12,15 +12,15 @@ const createProfile = async (req, res) => {
     try {
         switch (kind) {
             case "person":
-                profile = new Person(body);
+                profile = new Person({...body, owner: req.account.id});
                 break;
             case "company":
-                profile = new Company(body);
+                profile = new Company({...body, owner: req.account.id});
                 break;
             default:
                 return res.status(400).json({ msg: "Invalid kind" });
         }
-
+        
         await profile.save();
 
         res.header("Location", getUrl(req, profile.id));
@@ -35,7 +35,7 @@ const patch = async (req, res) => {
     try {
         const { firstName} = req.body;
 
-        const profile = Profile.findOne({ owner: req.account });
+        const profile = Profile.findOne({ owner: req.account.id });
         if (!profile) {
             res.status(404).json({ error: "Profile not found" });
         } else {
@@ -57,9 +57,6 @@ const getAccountById = async (req, res) => {
     try {
         const { id } = req.params;
         const profile = await Profile.findById({id: id});
-            if (err) {
-                res.status(500).json({ error: err.message });
-            }
             if (!profile) {
                 res.status(404).json({ error: "profile not found" });
             }
@@ -74,9 +71,6 @@ const getPosts = async (req, res) => {
     try {
         const { id } = req.params;
         const profile = await Profile.findById({id: id});
-            if (err) {
-                res.status(500).json({ error: err.message });
-            }
             if (!profile) {
                 res.status(404).json({ error: "profile not found" });
             }

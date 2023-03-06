@@ -22,7 +22,8 @@ const baseSchema = new mongoose.Schema(
         },
         // TODO
         owner: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            // type: String,
             ref: "Account",
         },
         updatedAt: {
